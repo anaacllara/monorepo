@@ -2,12 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>web</title>
+    <title>Bootcamp PWA</title>
+    
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#ec0089" />
+
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <div id="app"></div>
+    
+    <div id="app">
+      <h1>Painel de Bloqueio</h1>
+      
+      <div class="form-control">
+        <input type="text" id="url-input" placeholder="Digite a URL para bloquear" />
+        <button id="block-button">Bloquear</button>
+      </div>
+
+      <h2>Sites Bloqueados:</h2>
+      <ul id="url-list">
+        </ul>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

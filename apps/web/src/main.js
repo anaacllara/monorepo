@@ -1,24 +1,67 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('Service Worker registrado com sucesso:', registration);
+      })
+      .catch(err => {
+        console.error('Falha ao registrar Service Worker:', err);
+      });
+  });
+}
 
-setupCounter(document.querySelector('#counter'))
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'; 
+
+
+const urlInput = document.getElementById('url-input');
+const blockButton = document.getElementById('block-button');
+const urlList = document.getElementById('url-list');
+
+
+async function carregarLista() {
+  try {
+    const response = await fetch(`${API_URL}/urls`);
+    const data = await response.json();
+    
+    urlList.innerHTML = ''; 
+    data.urls.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item.url;
+      urlList.appendChild(li);
+    });
+  } catch (error) {
+    console.error('Falha ao carregar lista:', error);
+    urlList.innerHTML = '<li>Falha ao carregar lista da API</li>';
+  }
+}
+
+
+async function adicionarUrl() {
+  const urlParaBloquear = urlInput.value;
+  if (!urlParaBloquear) return;
+
+  try {
+    const response = await fetch(`${API_URL}/urls`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ url: urlParaBloquear }),
+    });
+
+    if (response.ok) {
+      urlInput.value = ''; 
+      carregarLista(); 
+    } else {
+      alert('Falha ao salvar URL');
+    }
+  } catch (error) {
+    console.error('Falha ao adicionar URL:', error);
+  }
+}
+
+
+blockButton.addEventListener('click', adicionarUrl);
+document.addEventListener('DOMContentLoaded', carregarLista);
