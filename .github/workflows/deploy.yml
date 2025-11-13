@@ -3,7 +3,7 @@ name: Deploy PWA (Vite) to GitHub Pages
 on:
   push:
     branches: [ main ] 
-  
+     
   workflow_dispatch:
 
 
@@ -20,30 +20,33 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      
       - name: Checkout
         uses: actions/checkout@v4
 
-      
-      - name: Dowload artifact
-        id: download_step
-        uses: actions/download-artifact@v4
-        with: 
-          name: web-dist
-          path: ./dist
-          continue-on-error: true
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - name: Install and Build PWA
+        run: |
+          cd apps/web
+          pnpm ci 
+          pnpm run build 
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        if: success() && steps.download_step.outcome == 'success' && hashFiles('./dist/**') != ''
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist 
-        if: success() && steps.download_step.outcome == 'success' && hashFiles('./dist/**') != ''
+          path: ./apps/web/dist 
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        if: success() && steps.download_step.outcome == 'success' && hashFiles('./dist/**') != ''
