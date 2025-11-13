@@ -1,23 +1,19 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
 
 :root {
   --fonte-principal: 'Roboto', sans-serif;
-  --cor-fundo: #f4f7f6; 
+  --cor-fundo: #f4f7f6;
   --cor-branca: #ffffff;
   --cor-texto: #333;
-  --cor-primaria: #c03737; 
+  --cor-primaria: #c03737;
   --cor-primaria-hover: #c03737;
 }
-
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 body {
   font-family: var(--fonte-principal);
@@ -29,7 +25,6 @@ body {
   min-height: 100vh;
   padding: 1rem;
 }
-
 
 #app {
   background-color: var(--cor-branca);
@@ -57,22 +52,19 @@ h2 {
   margin-bottom: 1rem;
 }
 
-
 .form-control {
   display: flex;
-  gap: 0.5rem; 
+  gap: 0.5rem;
 }
 
-
 #url-input {
-  flex-grow: 1; 
+  flex-grow: 1;
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-family: var(--fonte-principal);
   font-size: 1rem;
 }
-
 
 #block-button {
   padding: 0.75rem 1rem;
@@ -90,9 +82,8 @@ h2 {
   background-color: var(--cor-primaria-hover);
 }
 
-
 #url-list {
-  list-style: none; 
+  list-style: none;
 }
 
 #url-list li {
@@ -100,7 +91,6 @@ h2 {
   border-bottom: 1px solid #f0f0f0;
   font-size: 0.95rem;
 }
-
 
 #url-list li:last-child {
   border-bottom: none;
