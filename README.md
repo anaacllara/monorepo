@@ -1,5 +1,5 @@
 👩‍💻 Autoria
-Desenvolvido por Ana Clara(RA:22453030), Sabria Cardoso(RA:22451426) e Vinícius Bernardo(22453058), como parte do Bootcamp de Desenvolvimento Web.
+Desenvolvido por Ana Clara(RA:22453030), Sabrina Cardoso(RA:22451426) e Vinícius Bernardo(22453058), como parte do Bootcamp de Desenvolvimento Web.
 O projeto foi evoluído de uma extensão Chrome para um PWA completo com backend próprio, dentro de uma arquitetura monorepo.
 
 # BlockPWA
